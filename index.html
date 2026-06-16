@@ -1,13 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel=”stylesheet” href=”styles.css”>
     <title>Сватба - Константин и Ния</title>
+    <style>
+        @font-face {
+            font-family: "Anastasia Script";
+    src: url("assets/AnastasiaScriptRegular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+
+        }
+
+        :root {
+            color-scheme: light;
+            --accent: #791310;
+            --background: #f3ece1;
+            --card: rgba(255, 250, 244, 0.96);
+            --text: #4a1f1d;
+            --muted: #6d4842;
+            font-family: "Anastasia Script", Georgia, serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #f6f0e8 0%, #e9dfd3 100%);
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: url("assets/frame.png") center top / cover no-repeat;
+            opacity: 0.96;
+            z-index: -1;
+        }
+
+        .page {
+            width: min(100%, 520px);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            position: relative;
+        }
+
+        .card {
+            padding: 5vh;
+            position: relative;
+            width: 100%;
+            padding: 44px 28px;
+            overflow: hidden;
+            border-radius: 34px;
+            background: rgba(255, 250, 244, 0.96);
+            border: 3px solid rgba(121, 19, 16, 0.24);
+            box-shadow: 0 24px 48px rgba(121, 19, 16, 0.14);
+            z-index: 1;
+        }
+
+        .frame {
+            display: none;
+        }
+
+        .character {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 1/1;
+            background: url("assets/character.png") center 24% / contain no-repeat;
+            opacity: 0.14;
+            pointer-events: none;
+            z-index: 40;
+
+        }
+
+        .content {
+            position: relative;
+            display: grid;
+            gap: 18px;
+            text-align: center;
+        }
+
+        .content strong,
+        .content em {
+            font-style: normal;
+            /* font-weight: 700; */
+        }
+
+        .eyebrow {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--accent);
+            opacity: 0.95;
+        }
+
+        .hero {
+            margin: 0;
+            font-size: clamp(2.8rem, 5vw, 4.6rem);
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            color: var(--accent);
+        }
+
+        .hero small {
+            display: block;
+            font-size: 0.38em;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 0.6em;
+            color: var(--muted);
+        }
+
+        .message,
+        .location {
+            margin: 0;
+            font-size: 1.08rem;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .divider {
+            width: 80px;
+            height: 1px;
+            margin: 0 auto;
+            background: rgba(121, 19, 16, 0.28);
+        }
+
+        .date {
+            margin: 0;
+            font-size: 1.1rem;
+            letter-spacing: 0.06em;
+            color: var(--accent);
+        }
+
+        .location {
+            font-size: 1rem;
+        }
+
+        .cta {
+            width: min(100%, 320px);
+            padding: 16px 24px;
+            border: 2px solid var(--accent);
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 1rem;
+            /* font-weight: 700; */
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            cursor: pointer;
+            transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(121, 19, 16, 0.22);
+            background: #5a0d0d;
+        }
+
+        .hero,
+.eyebrow,
+.date,
+.cta,
+.content p {
+    font-family: "Anastasia Script", Georgia, serif;
+    font-weight: 400;
+}
+
+        @media (max-width: 520px) {
+            .card {
+                padding: 32px 22px;
+                border-radius: 28px;
+            }
+
+            .content {
+                gap: 14px;
+            }
+
+            .hero {
+                font-size: 2.6rem;
+            }
+
+            .cta {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    
-<script src="script.js"></script>
+    <div class="page">
+        <div class="character" aria-hidden="true"></div>
+        <article class="card">
+            <div class="content">
+                <p class="eyebrow">Там където водата среща небето</p>
+                <h1 class="hero">Ния и<br>Константин</h1>
+                <div class="divider"></div>
+                <p class="date">29/08/2026</p>
+            </div>
+        </article>
+
+        <button class="cta" id="rsvpBtn">Качете снимки</button>
+    </div>
+
+    <script>
+        const button = document.getElementById('rsvpBtn');
+        button.addEventListener('click', () => {
+            window.location.href = 'http://google.com/';
+        });
+
+        const font = new FontFace(
+  "DebugAnastasia",
+  'url("./assets/AnastasiaScriptRegular.ttf") format("truetype")'
+);
+
+try {
+  await font.load();
+  document.fonts.add(font);
+  console.log("Font loaded successfully:", font);
+} catch (error) {
+  console.error("Font failed:", error);
+}
+    </script>
 </body>
 </html>
