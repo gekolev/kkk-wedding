@@ -155,6 +155,9 @@
         }
 
         .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: min(100%, 320px);
             padding: 16px 24px;
             border: 2px solid var(--accent);
@@ -166,6 +169,7 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             cursor: pointer;
+            text-decoration: none;
             transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
         }
 
@@ -221,15 +225,10 @@
             </div>
         </article>
 
-        <button class="cta" id="rsvpBtn">Качете снимки</button>
+        <a class="cta" href="https://photos.app.goo.gl/LwWTd3PutW8Ztodh7" rel="noopener">Качете снимки</a>
     </div>
 
     <script>
-        const button = document.getElementById('rsvpBtn');
-        button.addEventListener('click', () => {
-            window.location.href = 'http://google.com/';
-        });
-
         const font = new FontFace(
   "DebugAnastasia",
   'url("./assets/AnastasiaScriptRegular.ttf") format("truetype")'
